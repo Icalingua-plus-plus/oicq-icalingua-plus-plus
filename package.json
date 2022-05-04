@@ -1,11 +1,11 @@
 {
-  "name": "oicq",
-  "app_name": "oicq",
-  "version": "1.21.3",
-  "app_version": "1.21.3",
-  "upday": "2021/12/08",
+  "name": "oicq-icalingua-plus-plus",
+  "app_name": "oicq-icalingua-plus-plus",
+  "version": "1.22.1",
+  "app_version": "1.22.1",
+  "upday": "2022/05/04",
   "protocol_version": "v11",
-  "description": "QQ protocol!",
+  "description": "oicq(https://github.com/takayama-lily/oicq) v1 for Icalingua++",
   "main": "index.js",
   "types": "index.d.ts",
   "type": "commonjs",
@@ -17,20 +17,9 @@
   "engines": {
     "node": ">= v12.16"
   },
-  "repository": "https://github.com/takayama-lily/oicq.git",
-  "keywords": [
-    "qq",
-    "oicq",
-    "protocol",
-    "android",
-    "bot",
-    "coolq"
-  ],
-  "author": "takayama",
+  "repository": "https://github.com/Icalingua-plus-plus/oicq-icalingua-plus-plus.git",
+  "author": "The Icalingua++ Authors",
   "license": "MPL-2.0",
-  "bugs": "https://github.com/takayama-lily/oicq/issues",
-  "homepage": "https://github.com/takayama-lily/oicq#readme",
-  "changelogs": "https://github.com/takayama-lily/oicq/releases",
   "dependencies": {
     "jsqr": "^1.4.0",
     "log4js": "^6.3.0",
