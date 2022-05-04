@@ -1,8 +1,8 @@
 # oicq-icalingua-plus-plus
 
-[![npm version](https://img.shields.io/npm/v/oicq-plus-plus.svg?logo=npm)](https://www.npmjs.com/package/oicq-plus-plus)
-[![dm](https://shields.io/npm/dm/oicq-plus-plus)](https://www.npmjs.com/package/oicq-plus-plus)
-[![node engine](https://img.shields.io/node/v/oicq-plus-plus.svg)](https://nodejs.org)
+[![npm version](https://img.shields.io/npm/v/oicq-icalingua-plus-plus.svg?logo=npm)](https://www.npmjs.com/package/oicq-icalingua-plus-plus)
+[![dm](https://shields.io/npm/dm/oicq-icalingua-plus-plus)](https://www.npmjs.com/package/oicq-icalingua-plus-plus)
+[![node engine](https://img.shields.io/node/v/oicq-icalingua-plus-plus.svg)](https://nodejs.org)
 [![discord](https://img.shields.io/static/v1?label=chat&message=on%20discord&color=7289da&logo=discord)](https://discord.gg/gKnU7BARzv)
 
 * 由於 [oicq](https://github.com/takayama-lily/oicq) 發布 v2 並停止對oicq v1 的維護，而~~我們比較懶（bushi）~~，先搞個 v1 的分支湊合用下（
