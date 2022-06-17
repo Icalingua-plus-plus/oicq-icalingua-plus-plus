@@ -962,7 +962,7 @@ export class Client extends EventEmitter {
      * resid在xml消息中，需要自行解析xml获得
      * 暂不支持套娃转发解析
      */
-    getForwardMsg(resid: string): Promise<Ret<Array<{
+    getForwardMsg(resid: string, fileName?: string): Promise<Ret<Array<{
         group_id?: number,
         user_id: number,
         nickname: string,
