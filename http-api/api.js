@@ -6,7 +6,7 @@ let bot;
 class NotFoundError extends Error {}
 
 const available_actions = [
-    "sendPrivateMsg",
+    "_sendPrivateMsg",
     "sendGroupMsg",
     "sendDiscussMsg",
     "sendMsg",
@@ -116,7 +116,7 @@ function toHump(action) {
 
 function quickOperate(event, res) {
     if (event.post_type === "message" && res.reply) {
-        const action = event.message_type === "private" ? "sendPrivateMsg" : "sendGroupMsg";
+        const action = event.message_type === "private" ? "_sendPrivateMsg" : "sendGroupMsg";
         const id = event.message_type === "private" ? event.user_id : event.group_id;
         bot[action](id, res.reply, res.auto_escape);
         if (event.group_id) {

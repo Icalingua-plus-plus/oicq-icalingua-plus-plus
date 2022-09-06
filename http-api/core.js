@@ -460,7 +460,7 @@ function loop() {
             if (bot.gl.has(target))
                 bot.sendGroupMsg(target, abc[1]);
             else
-                bot.sendPrivateMsg(target, abc[1]);
+                bot._sendPrivateMsg(target, abc[1]);
             break;
         case "eval":
             try {

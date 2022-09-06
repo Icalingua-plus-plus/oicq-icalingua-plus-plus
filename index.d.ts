@@ -933,7 +933,7 @@ export class Client extends EventEmitter {
     getGroupInfo(group_id: number, no_cache?: boolean): Promise<Ret<GroupInfo>>;
 
     /** 私聊 */
-    sendPrivateMsg(user_id: number, message: Sendable, auto_escape?: boolean): Promise<Ret<{ message_id: string }>>;
+    _sendPrivateMsg(user_id: number, message: Sendable, auto_escape?: boolean): Promise<Ret<{ message_id: string }>>;
     /** 群聊 */
     sendGroupMsg(group_id: number, message: Sendable, auto_escape?: boolean): Promise<Ret<{ message_id: string }>>;
     /** 群临时会话，大多数时候可以使用私聊达到同样效果 */
