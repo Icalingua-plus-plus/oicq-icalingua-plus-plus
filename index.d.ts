@@ -934,6 +934,7 @@ export class Client extends EventEmitter {
 
     /** 私聊 */
     _sendPrivateMsg(user_id: number, message: Sendable, auto_escape?: boolean): Promise<Ret<{ message_id: string }>>;
+    sendFile(user_id: number, file: MediaFile, name?: string, process?: (percentage: string) => void): Promise<Ret<{ message_id: string }>>;
     /** 群聊 */
     sendGroupMsg(group_id: number, message: Sendable, auto_escape?: boolean): Promise<Ret<{ message_id: string }>>;
     /** 群临时会话，大多数时候可以使用私聊达到同样效果 */
