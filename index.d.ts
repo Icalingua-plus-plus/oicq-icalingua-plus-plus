@@ -742,6 +742,7 @@ export interface Sig {
     tgt_key: Buffer,
     st_key: Buffer,
     st_web_sig: Buffer,
+    t103: Buffer,
     skey: Buffer,
     d2: Buffer,
     d2key: Buffer,
