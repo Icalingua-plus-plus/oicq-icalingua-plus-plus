@@ -1216,5 +1216,5 @@ export interface FakeMessage {
     message: Sendable, //可转发的有效元素理论上只有[文字、表情、图片]，不支持CQ码
     nickname?: string,
     time?: number, //时间戳(秒)，默认：当前时间
-    id?: string, //消息id，用于直接获取消息，默认按照message生成，否则使用对应的消息
+    id?: string, //消息id，用于获取消息气泡，默认不使用气泡
 }
