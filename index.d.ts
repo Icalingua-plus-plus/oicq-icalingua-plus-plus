@@ -325,6 +325,7 @@ export interface ReplyElem {
     type: "reply",
     data: {
         id: string, //message_id
+        text?: string, //消息文本内容，当获取原消息失败时使用
     }
 }
 
