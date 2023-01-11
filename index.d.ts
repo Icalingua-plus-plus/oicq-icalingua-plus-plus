@@ -1024,7 +1024,7 @@ export class Client extends EventEmitter {
     deleteFriend(user_id: number, block?: boolean): Promise<Ret>;
     /** 邀请好友入群(不支持陌生人和批量) */
     inviteFriend(group_id: number, user_id: number): Promise<Ret>;
-    /** 点赞(times默认1，不支持陌生人)  */
+    /** 点赞(times默认1，支持陌生人)  */
     sendLike(user_id: number, times?: number): Promise<Ret>;
 
     /** 设置昵称 */
