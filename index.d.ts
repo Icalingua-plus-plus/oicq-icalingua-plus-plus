@@ -456,6 +456,7 @@ interface CommonMessageEventData extends CommonEventData {
     post_type: "message",
     message: MessageElem[], //消息链
     raw_message: string, //字符串格式的消息
+    bubble_id: number,
     message_id: string,
     user_id: number,
     font: string,
@@ -974,6 +975,7 @@ export class Client extends EventEmitter {
         time: number,
         message: MessageElem[],
         raw_message: string,
+        bubble_id: number,
     }>>>;
 
     /**
