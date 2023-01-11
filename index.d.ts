@@ -1220,5 +1220,5 @@ export interface FakeMessage {
     time?: number, //时间戳(秒)，默认：当前时间
     id?: string, //消息id，用于获取消息气泡，默认不使用气泡
     consistent?: boolean, //是否让消息seq和random与id保持一致，如果id为空则无视，默认：false
-    bubble_id?: string, //用于插入消息气泡，可覆盖id获取的气泡，如果id不存在且不指定则不使用气泡
+    bubble_id?: number, //用于插入消息气泡，可覆盖id获取的气泡，如果id不存在且不指定则不使用气泡
 }
