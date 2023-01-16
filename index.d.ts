@@ -207,7 +207,8 @@ export interface FaceElem {
     type: "face" | "sface",
     data: {
         id: number,
-        text?: string
+        text?: string,
+        qlottie?: string
     }
 }
 
