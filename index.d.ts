@@ -947,7 +947,7 @@ export class Client extends EventEmitter {
     /** 互联分享 */
     sendJsonMsg(recv_id: number, json: string, group: boolean, sign: string): Promise<Ret>;
     /** 私聊 */
-    _sendPrivateMsg(user_id: number, message: Sendable, auto_escape?: boolean): Promise<Ret<{ message_id: string }>>;
+    sendPrivateMsg(user_id: number, message: Sendable, auto_escape?: boolean): Promise<Ret<{ message_id: string }>>;
     sendFile(user_id: number, file: MediaFile, name?: string, process?: (percentage: string) => void): Promise<Ret<{ message_id: string }>>;
     /** 群聊 */
     sendGroupMsg(group_id: number, message: Sendable, auto_escape?: boolean): Promise<Ret<{ message_id: string }>>;
