@@ -1232,3 +1232,28 @@ export interface FakeMessage {
     consistent?: boolean, //是否让消息seq和random与id保持一致，如果id为空则无视，默认：false
     bubble_id?: number, //用于插入消息气泡，可覆盖id获取的气泡，如果id不存在且不指定则不使用气泡
 }
+
+export namespace pb {
+    function encode(o: import("./lib/ref").Proto): Uint8Array;
+    function decode(buf: Buffer): import("../ref").Proto;
+}
+
+export namespace jce {
+    function decode(blob: Buffer): any;
+    function decodeNested(blob: Buffer): {[k: number]: any};
+    function encode(object: {[k: number]: any}|any[], struct: {[k: string]: number}): Buffer;
+    function encodeWrapper(map: Object, extra: {
+        version: 1,
+        pkt_type: 2,
+        msg_type: 3,
+        req_id: 4,
+        service: 5,
+        method: 6,
+        payload: 7,
+        timeout: 8,
+        context: 9,
+        status: 10,
+    }): Buffer;
+    function encodeStruct(nested: Object|Array, struct: Object|undefined): Buffer;
+    function encodeNested(nested: {[k: number]: any}|any[], struct: {[k: string]: number}): any;
+}

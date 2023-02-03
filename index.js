@@ -2,6 +2,8 @@
 const { Client } = require("./lib/oicq");
 const { segment, cqcode } = require("./util");
 const { checkUin, NOOP } = require("./lib/common");
+const pb = require("./lib/algo/pb");
+const jce = require("./lib/algo/jce");
 
 const constants = {
     PLATFORM_ANDROID: 1,
@@ -22,7 +24,7 @@ module.exports = {
     segment, cqcode,
     /** @deprecated */
     setGlobalConfig: NOOP,
-    constants,
+    constants, pb, jce,
 };
 
 const ERROR_UIN = new Error("Argument uin is not an OICQ account.");
