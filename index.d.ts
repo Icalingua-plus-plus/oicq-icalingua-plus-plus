@@ -597,7 +597,7 @@ export interface GroupTransferEventData extends CommonGroupNoticeEventData {
     user_id: number, //新群主
 }
 export interface GroupTitleEventData extends CommonGroupNoticeEventData {
-    sub_type: "title", //群头衔变更(暂未实现该事件)
+    sub_type: "title", //群头衔变更
     group_id: number,
     user_id: number,
     nickname: string,
@@ -607,6 +607,7 @@ export interface GroupSettingEventData extends CommonGroupNoticeEventData {
     sub_type: "setting", //群设置变更
     group_id: number,
     group_name?: string, //群名变更
+    user_id?: number, //群名变更操作人
     enable_guest?: boolean, //允许游客
     enable_anonymous?: boolean, //允许匿名
     enable_upload_album?: boolean, //允许群员上传相册
