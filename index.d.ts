@@ -1235,7 +1235,7 @@ export interface FakeMessage {
 
 export namespace pb {
     function encode(o: import("./lib/ref").Proto): Uint8Array;
-    function decode(buf: Buffer): import("../ref").Proto;
+    function decode(buf: Buffer): import("./lib/ref").Proto;
 }
 
 export namespace jce {
@@ -1243,17 +1243,17 @@ export namespace jce {
     function decodeNested(blob: Buffer): {[k: number]: any};
     function encode(object: {[k: number]: any}|any[], struct: {[k: string]: number}): Buffer;
     function encodeWrapper(map: Object, extra: {
-        version: 1,
-        pkt_type: 2,
-        msg_type: 3,
-        req_id: 4,
-        service: 5,
-        method: 6,
-        payload: 7,
-        timeout: 8,
-        context: 9,
-        status: 10,
+        version: number,
+        pkt_type: number,
+        msg_type: number,
+        req_id: number,
+        service: number,
+        method: number,
+        payload: number,
+        timeout: number,
+        context: number,
+        status: number,
     }): Buffer;
-    function encodeStruct(nested: Object|Array, struct: Object|undefined): Buffer;
+    function encodeStruct(nested: Object|Array<any>, struct: Object|undefined): Buffer;
     function encodeNested(nested: {[k: number]: any}|any[], struct: {[k: string]: number}): any;
 }
