@@ -70,7 +70,7 @@ export interface HighwayUploadStreamObject {
 }
 
 export interface Proto {
-    [k: number]: Proto,
+    [k: number]: Proto | any,
     toString: () => string,
     toHex: () => string,
     toBase64: () => string,
