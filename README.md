@@ -5,8 +5,8 @@
 [![node engine](https://img.shields.io/node/v/oicq-icalingua-plus-plus.svg)](https://nodejs.org)
 [![discord](https://img.shields.io/static/v1?label=chat&message=on%20discord&color=7289da&logo=discord)](https://discord.gg/gKnU7BARzv)
 
-* 由於 [oicq](https://github.com/takayama-lily/oicq) 發布 v2 並停止對oicq v1 的維護，而~~我們比較懶（bushi）~~，先搞個 v1 的分支湊合用下（
-* [oicq v2.0](../../tree/main) 已发布，此分支版本会继续维护bug至2022/4/30 (不过似乎也没什么重大bug)
+* 本库为 [oicq](https://github.com/takayama-lily/oicq)  v1 的第三方维护版，目的是为了使 Icalingua++ 能正常工作。
+* oicq-icalingua-plus-plus 的诞生离不开  OICQ 原作者 [takayama-lily](https://github.com/takayama-lily) 与其他贡献者的贡献！
 * QQ(安卓)协议基于Node.js的实现，支持最低node版本为 v12.16
 * 若你不熟悉Node.js或不会组织代码，可通过 [template](https://github.com/takayama-lily/oicq-template) 创建一个简单的应用程序
 * [API参考文档](https://github.com/takayama-lily/oicq/wiki/91.API%E6%96%87%E6%A1%A3) / [事件参考文档](https://github.com/takayama-lily/oicq/wiki/92.%E4%BA%8B%E4%BB%B6%E6%96%87%E6%A1%A3) / [wiki列表](https://github.com/takayama-lily/oicq/wiki)
