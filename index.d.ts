@@ -1027,6 +1027,8 @@ export class Client extends EventEmitter {
     setGroupLeave(group_id: number, dismiss?: boolean): Promise<Ret>;
     /** 戳一戳(可以对好友使用) */
     sendGroupPoke(group_id: number, user_id: number): Promise<Ret>;
+    /** 群打卡 */
+    sendGroupSign(group_id: number): Promise<Ret>;
 
     /** 处理好友请求 */
     setFriendAddRequest(flag: string, approve?: boolean, remark?: string, block?: boolean): Promise<Ret>;
