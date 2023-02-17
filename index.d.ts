@@ -992,6 +992,7 @@ export class Client extends EventEmitter {
         user_id: number,
         nickname: string,
         time: number,
+        seq: number,
         message: MessageElem[],
         raw_message: string,
         bubble_id: number,
