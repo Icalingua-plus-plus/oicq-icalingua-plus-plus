@@ -51,6 +51,7 @@ export interface ApkInfo {
     bitmap: number,
     sigmap: number,
     sdkver: string,
+    ssover: number,
 }
 
 export type ProtocolResponse = Promise<{
