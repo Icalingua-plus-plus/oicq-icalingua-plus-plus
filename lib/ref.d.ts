@@ -37,6 +37,8 @@ export interface Device {
     imsi: Buffer;
     tgtgt: Buffer;
     guid: Buffer;
+    qimei16: string;
+    qimei36: string;
 }
 
 export interface ApkInfo {
@@ -53,6 +55,11 @@ export interface ApkInfo {
     sdkver: string,
     ssover: number,
 }
+
+export type QimeiData = Promise<{
+    q16: string,
+    q36: string,
+}>
 
 export type ProtocolResponse = Promise<{
     result: number,
