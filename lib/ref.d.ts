@@ -39,6 +39,7 @@ export interface Device {
     guid: Buffer;
     qimei16: string;
     qimei36: string;
+    mtime: number;
 }
 
 export interface ApkInfo {
