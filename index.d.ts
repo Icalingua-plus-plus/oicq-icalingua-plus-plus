@@ -13,7 +13,7 @@ export interface ConfBot {
 
     /** 日志等级，默认info (往屏幕打印日志会降低性能，若消息量巨大建议修改此参数或重定向) */
     log_level?: "trace" | "debug" | "info" | "warn" | "error" | "fatal" | "mark" | "off",
-    /** 1:安卓手机(默认) 2:aPad 3:安卓手表 4:MacOS 5:iPad */
+    /** 1:安卓手机(默认) 2:aPad 3:安卓手表 4:MacOS 5:iPad 6:安卓修复8.8.88 7:安卓手机8.9.33 8:aPad8.9.33*/
     platform?: number,
     /** 被踢下线是否在3秒后重新登陆，默认false */
     kickoff?: boolean,
