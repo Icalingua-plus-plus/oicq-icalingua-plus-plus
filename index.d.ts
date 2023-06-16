@@ -148,6 +148,7 @@ export interface MemberBaseInfo {
     readonly level: number, //等级
     readonly role: GroupRole, //权限
     readonly title: string, //头衔
+    readonly subid: number,
 }
 /** 群员资料 */
 export interface MemberInfo extends MemberBaseInfo {
