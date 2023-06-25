@@ -44,6 +44,9 @@ export interface ConfBot {
     /** ffmpeg */
     ffmpeg_path?: string,
     ffprobe_path?: string,
+
+    /** 获取头部sign的服务器地址，用于解决登录45和发送消息风控 */
+    sign_api_addr?: string,
 }
 
 export interface Statistics {
@@ -896,6 +899,7 @@ export class Client extends EventEmitter {
     readonly uin: number;
     readonly password_md5?: Buffer;
     readonly nickname: string;
+    readonly needSignCmd: Array<string>;
     readonly sex: Gender;
     readonly age: number;
     readonly bkn: number; //csrf token

@@ -55,6 +55,7 @@ export interface ApkInfo {
     sigmap: number,
     sdkver: string,
     ssover: number,
+    qua: string,
 }
 
 export type QimeiData = Promise<{
@@ -176,11 +177,12 @@ export class Client extends oicq.Client {
 
     nextSeq(): number;
     send(): Promise<Buffer>;
-    writeUni(cmd: string, body: Buffer, seq?: number): void;
+    writeUni(cmd: string, body: Buffer, seq?: number): Promise<void>;
     msgExists(from: number, type: number, seq: number, time: number): boolean;
     buildSyncCookie(): Buffer;
     parseEventType(name: string): oicq.CommonEventData;
     pbGetMsg(): Promise<boolean>;
+    getSign(cmd: string, body: Buffer): Promise<Buffer>;
 }
 
 export * from '../index';
