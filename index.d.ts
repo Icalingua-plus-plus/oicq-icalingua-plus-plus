@@ -775,6 +775,7 @@ export interface Sig {
     ticket_key: Buffer,
     device_token?: Buffer,
     emp_time: number,
+    time_diff: number,
 }
 
 export interface EventMap {
