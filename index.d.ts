@@ -45,8 +45,11 @@ export interface ConfBot {
     ffmpeg_path?: string,
     ffprobe_path?: string,
 
-    /** 获取头部sign的服务器地址，用于解决登录45和发送消息风控 */
+    /** 获取头部sign和Tlv544的qsign服务器地址，用于解决登录45和发送消息风控 */
     sign_api_addr?: string,
+
+    /** qsign服务器的key */
+    sign_api_key?: string,
 }
 
 export interface Statistics {
