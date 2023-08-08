@@ -1068,6 +1068,8 @@ export class Client extends EventEmitter {
     setDescription(description?: string): Promise<Ret>;
     /** 设置个人签名 */
     setSignature(signature?: string): Promise<Ret>;
+    /** 获取个人签名 */
+    getSignature(): Promise<Ret<string>>;
     /** 设置个人头像 */
     setPortrait(file: MediaFile): Promise<Ret>; //
     /** 设置群头像 */
@@ -1140,6 +1142,8 @@ export class Client extends EventEmitter {
     sendUni(cmd: string, body: Uint8Array): Promise<Buffer>;
     /** 发送一个未加密的oidb包 */
     sendOidb(cmd: string, body: Uint8Array): Promise<Buffer>;
+    /** 发送一个未加密的OidbSvcTrpcTcp包 */
+    sendOidbSvcTrpcTcp(cmd: string, body: Uint8Array): Promise<Ret<any>>;
     /** 触发一个oicq标准事件 */
     em(name: string, data?: any): void;
 }
