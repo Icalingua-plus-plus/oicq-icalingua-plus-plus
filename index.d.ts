@@ -943,7 +943,7 @@ export class Client extends EventEmitter {
     login(password?: Uint8Array | string): void;
 
     /** 提交滑动验证码ticket */
-    sliderLogin(ticket: string): void;
+    sliderLogin(ticket: string): Promise<void>;
     /** 先下线再关闭连接 */
     logout(): Promise<void>;
     /** 直接关闭连接 */
@@ -953,7 +953,7 @@ export class Client extends EventEmitter {
     /** 发验证码给密保手机，用于发短信过设备锁 */
     sendSMSCode(): void;
     /** 提交收到的短信验证码 */
-    submitSMSCode(code: string): void;
+    submitSMSCode(code: string): Promise<void>;
 
     /**
      * 设置在线状态
