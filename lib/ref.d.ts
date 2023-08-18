@@ -185,7 +185,7 @@ export class Client extends oicq.Client {
     getSign(cmd: string, body: Buffer): Promise<Buffer>;
     getT544(cmd: string): Promise<Buffer>;
     registerQSign(): Promise<void>;
-    handleSsoCallback(callbackList: Array): Promise<void>;
+    handleSsoCallback(callbackList: Array<any>): Promise<void>;
     submitSsoCallback(cmd: string, callbackId: number, body: Buffer): Promise<void>;
     refreshQSignToken(): Promise<void>;
 }
