@@ -50,6 +50,9 @@ export interface ConfBot {
 
     /** qsign服务器的key */
     sign_api_key?: string,
+
+    /** 强制使用算法计算T544，而不使用qsign(算法为8.9.50的0C05，混用版本可能导致风控) */
+    force_algo_T544?: boolean,
 }
 
 export interface Statistics {
