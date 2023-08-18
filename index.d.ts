@@ -783,6 +783,7 @@ export interface Sig {
     emp_time: number,
     time_diff: number,
     _ksid: Buffer,
+    qsign_token_time: number,
 }
 
 export interface EventMap {
