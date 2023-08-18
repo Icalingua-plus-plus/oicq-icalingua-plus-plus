@@ -183,7 +183,7 @@ export class Client extends oicq.Client {
     parseEventType(name: string): oicq.CommonEventData;
     pbGetMsg(): Promise<boolean>;
     getSign(cmd: string, body: Buffer): Promise<Buffer>;
-    getT544(cmd: string, body: Buffer): Promise<Buffer>;
+    getT544(cmd: string): Promise<Buffer>;
 }
 
 export * from '../index';
