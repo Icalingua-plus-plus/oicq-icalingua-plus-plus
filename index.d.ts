@@ -772,6 +772,7 @@ export interface Sig {
     st_key: Buffer,
     st_web_sig: Buffer,
     t103: Buffer,
+    t543: Buffer,
     t544: Object,
     t547: Buffer,
     skey: Buffer,
@@ -905,6 +906,7 @@ export interface EventMap {
  */
 export class Client extends EventEmitter {
 
+    uid: string;
     readonly uin: number;
     readonly password_md5?: Buffer;
     readonly nickname: string;
