@@ -23,6 +23,7 @@ const available_actions = [
     "setGroupCard",
     "setGroupName",
     "setGroupLeave",
+    "setGroupRemark",
     "sendGroupNotice",
     "setGroupSpecialTitle",
     "setFriendAddRequest",
@@ -63,6 +64,7 @@ const available_actions = [
     "setSignature",
     "setPortrait",
     "setGroupPortrait",
+    "setFriendRemark",
 
     "getSystemMsg",
     "getChatHistory",

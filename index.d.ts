@@ -133,6 +133,7 @@ export interface FriendInfo extends StrangerInfo {
 export interface GroupInfo {
     readonly group_id: number, //群号
     readonly group_name: string, //群名
+    readonly group_remark: string, // 群备注
     readonly member_count: number, //群员数
     readonly max_member_count: number, //最大群员数
     readonly owner_id: number, //群主账号
@@ -492,6 +493,7 @@ export interface GroupMessageEventData extends CommonMessageEventData {
     sub_type: "normal" | "anonymous",
     group_id: number,
     group_name: string,
+    group_remark: string,
     anonymous: Anonymous | null, //匿名消息
     sender: MemberBaseInfo,
     atme: boolean,
@@ -672,6 +674,15 @@ export interface SyncBlackEventData extends CommonEventData {
     post_type: "sync",
     sync_type: "black", //同步黑名单
     blacklist: number[],
+}
+
+export interface SyncRemarkEventData extends CommonEventData {
+    post_type: "sync",
+    sync_type: "remark",
+    sub_type: "private" | "group",
+    group_id?: number,
+    user_id?: number,
+    remark: string,
 }
 
 export type FriendNoticeEventData = FriendIncreaseEventData | FriendDecreaseEventData | FriendRecallEventData |
@@ -891,6 +902,10 @@ export interface EventMap {
     "sync.readed": (this: Client, data: SyncReadedEventData) => void;
     "sync.readed.private": (this: Client, data: SyncReadedEventData) => void;
     "sync.readed.group": (this: Client, data: SyncReadedEventData) => void;
+    /**备注名修改事件 */
+    "sync.remark": (this: Client, data: SyncRemarkEventData) => void;
+    "sync.remark.private": (this: Client, data: SyncRemarkEventData) => void;
+    "sync.remark.group": (this: Client, data: SyncRemarkEventData) => void;
     /**监听以上所有sync事件 */
     "sync": (this: Client, data: SyncEventData) => void;
 
@@ -1048,6 +1063,8 @@ export class Client extends EventEmitter {
     sendGroupPoke(group_id: number, user_id: number): Promise<Ret>;
     /** 群打卡 */
     sendGroupSign(group_id: number): Promise<Ret>;
+    /** 设置群备注名 */
+    setGroupRemark(group_id: number, remark: string): Promise<Ret>;
 
     /** 处理好友请求 */
     setFriendAddRequest(flag: string, approve?: boolean, remark?: string, block?: boolean): Promise<Ret>;
@@ -1066,6 +1083,8 @@ export class Client extends EventEmitter {
     inviteFriend(group_id: number, user_id: number): Promise<Ret>;
     /** 点赞(times默认1，支持陌生人)  */
     sendLike(user_id: number, times?: number): Promise<Ret>;
+    /** 设置好友备注名 */
+    setFriendRemark(user_id: number, remark: string): Promise<Ret>;
 
     /** 设置昵称 */
     setNickname(nickname: string): Promise<Ret>;
