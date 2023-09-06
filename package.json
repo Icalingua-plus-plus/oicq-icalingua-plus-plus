@@ -1,8 +1,8 @@
 {
   "name": "oicq-icalingua-plus-plus",
   "app_name": "oicq-icalingua-plus-plus",
-  "version": "1.23.69",
-  "app_version": "1.23.69",
+  "version": "1.23.70",
+  "app_version": "1.23.70",
   "upday": "2023/09/06",
   "protocol_version": "v11",
   "description": "oicq(https://github.com/takayama-lily/oicq) v1 for Icalingua++",

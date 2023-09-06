@@ -1026,6 +1026,7 @@ export class Client extends EventEmitter {
         nickname: string,
         time: number,
         seq: number,
+        head_img?: string,
         message: MessageElem[],
         raw_message: string,
         bubble_id: number,
