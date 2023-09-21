@@ -219,7 +219,8 @@ export interface FaceElem {
     data: {
         id: number,
         text?: string,
-        qlottie?: string
+        qlottie?: string,
+        extra?: string
     }
 }
 
