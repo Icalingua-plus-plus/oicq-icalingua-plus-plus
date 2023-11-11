@@ -53,6 +53,9 @@ export interface ConfBot {
 
     /** 强制使用算法计算T544，而不使用qsign(算法为8.9.50的0C05，混用版本可能导致风控) */
     force_algo_T544?: boolean,
+
+    /** 使用NT上线包，部分消息暂未支持 */
+    useNT?: boolean,
 }
 
 export interface Statistics {
