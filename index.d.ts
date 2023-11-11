@@ -790,6 +790,7 @@ export interface Sig {
     t543: Buffer,
     t544: Object,
     t547: Buffer,
+    t553: Buffer,
     skey: Buffer,
     d2: Buffer,
     d2key: Buffer,
