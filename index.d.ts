@@ -195,7 +195,8 @@ export interface MemberInfo extends MemberBaseInfo {
  */
 export type MessageElem = TextElem | AtElem | FaceElem | BfaceElem | MfaceElem |
     ImgPttElem | LocationElem | MusicElem | ShareElem | JsonElem | XmlElem |
-    AnonymousElem | ReplyElem | NodeElem | ShakeElem | PokeElem | FileElem | VideoElem | MiraiElem | RawElem;
+    AnonymousElem | ReplyElem | NodeElem | ShakeElem | PokeElem | FileElem | VideoElem |
+    MiraiElem | RawElem | MarkdownElem;
 
 export type Sendable = string | MessageElem | Iterable<MessageElem | string>
 
@@ -374,6 +375,13 @@ export interface MiraiElem {
     }
 }
 
+/** Markdown消息 */
+export interface MarkdownElem {
+    type: "markdown",
+    data: {
+        markdown: string
+    }
+}
 /** 该元素为需要直接发送的原始消息体，JSON 格式 */
 export interface RawElem {
     type: "raw",
