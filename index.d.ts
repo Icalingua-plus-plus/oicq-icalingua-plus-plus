@@ -381,6 +381,11 @@ export interface MarkdownElem {
     type: "markdown",
     data: {
         markdown: string
+        config?: {
+            unknown: number,
+            time: number,
+            token?: string,
+        }
     }
 }
 /** 该元素为需要直接发送的原始消息体，JSON 格式 */
