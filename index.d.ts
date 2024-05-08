@@ -225,7 +225,7 @@ export interface FaceElem {
         id: number,
         text?: string,
         qlottie?: string,
-        extra?: string
+        extra?: string, //携带额外参数的json
     }
 }
 
