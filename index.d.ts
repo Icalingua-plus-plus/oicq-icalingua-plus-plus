@@ -1134,12 +1134,6 @@ export class Client extends EventEmitter {
     /** 获取漫游表情 */
     getRoamingStamp(no_cache?: boolean): Promise<Ret<string[]>>;
 
-    /** 获取NT群图Rkey */
-    getGroupNTPicRkey(): Promise<Ret<string>>;
-
-    /** 获取NT私图Rkey */
-    getOffNTPicRkey(): Promise<Ret<string>>;
-
     /** 根据NT图fileid获取URL */
     getNTPicURLbyFileid(fileid: string): Promise<Ret<string>>;
 
