@@ -1135,13 +1135,13 @@ export class Client extends EventEmitter {
     getRoamingStamp(no_cache?: boolean): Promise<Ret<string[]>>;
 
     /** 获取NT群图Rkey */
-    getGroupNTPicRkey(): Promise<Ret<string[]>>;
+    getGroupNTPicRkey(): Promise<Ret<string>>;
 
     /** 获取NT私图Rkey */
-    getOffNTPicRkey(): Promise<Ret<string[]>>;
+    getOffNTPicRkey(): Promise<Ret<string>>;
 
     /** 根据NT图fileid获取URL */
-    getNTPicURLbyFileid(fileid: string): Promise<Ret<string[]>>;
+    getNTPicURLbyFileid(fileid: string): Promise<Ret<string>>;
 
     /** 清除 image 和 record 文件夹下的缓存文件 */
     cleanCache(type?: "image" | "record"): Promise<Ret>;
