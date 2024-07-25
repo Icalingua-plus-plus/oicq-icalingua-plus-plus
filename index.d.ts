@@ -591,6 +591,17 @@ export interface GroupSignEventData extends CommonGroupNoticeEventData {
     nickname: string, //打卡者昵称
     sign_text: string, //打卡提示
 }
+export interface GroupEssenceEventData extends CommonGroupNoticeEventData {
+    sub_type: "essence", //群精华
+    group_id: number, //群号
+    seq: number, //消息序号
+    random: number, //消息随机数
+    add: boolean, //是否是添加
+    user_id: number, //消息发送者
+    user_name: string, //消息发送者昵称
+    operator_id: number, //操作者
+    operator_name: string, //操作者昵称
+}
 export interface MemberIncreaseEventData extends CommonGroupNoticeEventData {
     sub_type: "increase", //群增加或群员增加
     group_id: number,
@@ -707,7 +718,8 @@ export type FriendNoticeEventData = FriendIncreaseEventData | FriendDecreaseEven
     FriendProfileEventData | FriendPokeEventData; //5
 export type GroupNoticeEventData = GroupRecallEventData | GroupSettingEventData | GroupTitleEventData |
     GroupTransferEventData | GroupMuteEventData | GroupAdminEventData |
-    MemberIncreaseEventData | MemberDecreaseEventData | GroupPokeEventData | GroupSignEventData; //10
+    MemberIncreaseEventData | MemberDecreaseEventData | GroupPokeEventData | GroupSignEventData |
+    GroupEssenceEventData; //11
 
 export type SystemEventData = DeviceEventData | SliderEventData | LoginErrorEventData | QrcodeEventData |
     OfflineEventData | OnlineEventData; //6(4+2)
@@ -900,6 +912,8 @@ export interface EventMap {
     "notice.group.poke": (this: Client, data: GroupPokeEventData) => void;
     /**群打卡事件 */
     "notice.group.sign": (this: Client, data: GroupSignEventData) => void;
+    /**群精华事件 */
+    "notice.group.essence": (this: Client, data: GroupEssenceEventData) => void;
     /**群设置变更事件 */
     "notice.group.setting": (this: Client, data: GroupSettingEventData) => void;
     /**监听以上所有好友notice事件 */
