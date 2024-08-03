@@ -127,6 +127,7 @@ export interface StrangerInfo {
     readonly signature?: string, //个性签名
     readonly description?: string, //个人说明
     readonly group_id?: number, //临时会话群号
+    readonly uid?: string,
 }
 /** 好友资料 */
 export interface FriendInfo extends StrangerInfo {
@@ -162,7 +163,7 @@ export interface MemberBaseInfo {
     readonly role: GroupRole, //权限
     readonly title: string, //头衔
     readonly subid: number,
-    readonly uid: string,
+    readonly uid?: string,
 }
 /** 群员资料 */
 export interface MemberInfo extends MemberBaseInfo {
@@ -954,7 +955,7 @@ export interface EventMap {
  */
 export class Client extends EventEmitter {
 
-    uid: string;
+    readonly uid?: string;
     readonly uin: number;
     readonly password_md5?: Buffer;
     readonly nickname: string;
