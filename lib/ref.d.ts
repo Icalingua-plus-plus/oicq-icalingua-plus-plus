@@ -182,7 +182,7 @@ export class Client extends oicq.Client {
     buildSyncCookie(): Buffer;
     parseEventType(name: string): oicq.CommonEventData;
     pbGetMsg(): Promise<boolean>;
-    getSign(cmd: string, body: Buffer): Promise<Buffer>;
+    getSign(cmd: string, body: Buffer, seq?: number): Promise<Buffer>;
     getT544(cmd: string): Promise<Buffer>;
     registerQSign(): Promise<void>;
     handleSsoCallback(callbackList: Array<any>): Promise<void>;
