@@ -1325,7 +1325,7 @@ export interface FakeMessage {
 }
 
 export namespace pb {
-    function encode(o: import("./lib/ref").Proto): Uint8Array;
+    function encode(o: Object): Uint8Array;
     function decode(buf: Buffer): import("./lib/ref").Proto;
 }
 
