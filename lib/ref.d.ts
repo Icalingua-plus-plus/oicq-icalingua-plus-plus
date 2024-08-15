@@ -188,6 +188,7 @@ export class Client extends oicq.Client {
     handleSsoCallback(callbackList: Array<any>): Promise<void>;
     submitSsoCallback(cmd: string, callbackId: number, body: Buffer): Promise<void>;
     refreshQSignToken(): Promise<void>;
+    buildSSOReserveField(cmd: string, body: Buffer, seq?: number, options?: Array<string>): Promise<Buffer>;
 }
 
 export * from '../index';

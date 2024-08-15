@@ -1209,7 +1209,7 @@ export class Client extends EventEmitter {
     /** 发送一个未加密的oidb包 */
     sendOidb(cmd: string, body: Uint8Array): Promise<Buffer>;
     /** 发送一个未加密的OidbSvcTrpcTcp包 */
-    sendOidbSvcTrpcTcp(cmd: string, body: Uint8Array): Promise<Ret<any>>;
+    sendOidbSvcTrpcTcp(cmd: string, body: Uint8Array, useUid?: boolean): Promise<Ret<any>>;
     /** 触发一个oicq标准事件 */
     em(name: string, data?: any): void;
 }
