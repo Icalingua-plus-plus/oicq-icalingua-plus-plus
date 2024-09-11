@@ -1040,7 +1040,7 @@ export class Client extends EventEmitter {
     getMsg(message_id: string): Promise<Ret<PrivateMessageEventData | GroupMessageEventData>>;
 
     /**
-     * 获取message_id往前的count条消息(包括自身)
+     * 获取message_id往前的count条消息(群聊未撤回时必包括自身，私聊不包括自身)
      * 无法获取被撤回的消息，因此返回的数量并不一定为count
      * count默认为20，不能超过20
      * 
