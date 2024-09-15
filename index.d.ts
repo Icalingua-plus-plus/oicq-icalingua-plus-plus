@@ -811,6 +811,7 @@ export interface Sig {
     srm_token: Buffer,
     tgt: Buffer,
     tgt_key: Buffer,
+    st_sig: Buffer,
     st_key: Buffer,
     st_web_sig: Buffer,
     t103: Buffer,
