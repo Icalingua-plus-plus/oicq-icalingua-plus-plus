@@ -976,6 +976,10 @@ export class Client extends EventEmitter {
     readonly gl: ReadonlyMap<number, GroupInfo>;
     /** 群员列表缓存 */
     readonly gml: ReadonlyMap<number, ReadonlyMap<number, MemberInfo>>;
+    /** uid转uin列表 */
+    readonly uid2uin_map: ReadonlyMap<string, number>;
+    /** uin转uid列表 */
+    readonly uin2uid_map: ReadonlyMap<number, string>;
     /** 黑名单 */
     readonly blacklist: ReadonlySet<number>;
     /** 日志记录器 */
