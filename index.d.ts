@@ -1157,6 +1157,12 @@ export class Client extends EventEmitter {
     /** 根据NT图fileid获取URL */
     getNTPicURLbyFileid(fileid: string): Promise<Ret<string>>;
 
+    /** 获取已登录的设备 */
+    getDevLoginInfo(): Promise<Ret<Object[]>>;
+
+    /** 踢出已登录的设备 */
+    delDevLoginInfo(flag: string): Promise<Ret>;
+
     /** 清除 image 和 record 文件夹下的缓存文件 */
     cleanCache(type?: "image" | "record"): Promise<Ret>;
 
