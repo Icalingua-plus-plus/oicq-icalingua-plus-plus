@@ -33,7 +33,7 @@ jobs:
           fi
 
       - name: Install
-        run: npm ci
+        run: npm install
 
       - name: Publish
         run: npm publish
