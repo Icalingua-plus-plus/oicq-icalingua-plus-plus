@@ -1165,6 +1165,9 @@ export class Client extends EventEmitter {
     /** 踢出已登录的设备 */
     delDevLoginInfo(flag: string): Promise<Ret>;
 
+    /** 根据fileid获取私聊文件URL */
+    getC2CFileUrl(fileid: string): Promise<Ret<string>>;
+
     /** 清除 image 和 record 文件夹下的缓存文件 */
     cleanCache(type?: "image" | "record"): Promise<Ret>;
 
