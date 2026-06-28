@@ -21,23 +21,23 @@
   "author": "The Icalingua++ Authors",
   "license": "MPL-2.0",
   "dependencies": {
-    "axios": "^1.2.1",
-    "jsqr": "^1.4.0",
-    "log4js": "^6.3.0",
-    "long": "^4.0.0",
-    "pngjs": "^6.0.0",
-    "probe-image-size": "^7.2.1",
-    "qrcode-terminal": "^0.12.0",
-    "ws": "^7.5.5"
+    "axios": "1.14.0",
+    "jsqr": "1.4.0",
+    "log4js": "6.9.1",
+    "long": "4.0.0",
+    "pngjs": "6.0.0",
+    "probe-image-size": "7.2.3",
+    "qrcode-terminal": "0.12.0",
+    "ws": "7.5.11"
   },
   "devDependencies": {
     "@types/node": "^16.7.13",
-    "@types/probe-image-size": "^7.0.1",
-    "@types/ws": "^7.4.7",
-    "chai": "^4.3.4",
-    "mocha": "^8.4.0",
-    "mockjs": "^1.1.0",
-    "protobufjs": "^6.11.2"
+    "@types/probe-image-size": "7.0.1",
+    "@types/ws": "7.4.7",
+    "chai": "4.5.0",
+    "mocha": "8.4.0",
+    "mockjs": "1.1.0",
+    "protobufjs": "6.11.6"
   },
   "files": [
     "/bin",
