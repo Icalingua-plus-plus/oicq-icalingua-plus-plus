@@ -21,7 +21,7 @@
   "author": "The Icalingua++ Authors",
   "license": "MPL-2.0",
   "dependencies": {
-    "axios": "1.14.0",
+    "axios": "1.18.1",
     "jsqr": "1.4.0",
     "log4js": "6.9.1",
     "long": "4.0.0",
