@@ -56,6 +56,23 @@ export interface ConfBot {
 
     /** 使用NT上线包，部分消息暂未支持 */
     useNT?: boolean,
+
+    /** 指定APK信息，覆盖默认的协议参数 */
+    apk_info?: {
+        id?: string,
+        name?: string,
+        version?: string,
+        ver?: string,
+        sign?: Buffer,
+        buildtime?: number,
+        appid?: number,
+        subid?: number,
+        bitmap?: number,
+        sigmap?: number,
+        sdkver?: string,
+        ssover?: number,
+        qua?: string,
+    }
 }
 
 export interface Statistics {
