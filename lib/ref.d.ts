@@ -183,7 +183,8 @@ export class Client extends oicq.Client {
 
     nextSeq(): number;
     send(): Promise<Buffer>;
-    writeUni(cmd: string, body: Buffer, seq?: number): Promise<void>;
+    sendUni(cmd: string, body: Uint8Array, timeout?: number, options?: SsoOptions): Promise<Buffer>;
+    writeUni(cmd: string, body: Buffer, seq?: number, options?: SsoOptions): Promise<void>;
     msgExists(from: number, type: number, seq: number, time: number): boolean;
     buildSyncCookie(): Buffer;
     parseEventType(name: string): oicq.CommonEventData;

@@ -1240,7 +1240,9 @@ export class Client extends EventEmitter {
 
     //----------以下为隐藏方法，可用于扩展协议----------\\
     /** 发送一个未加密的uni包 */
-    sendUni(cmd: string, body: Uint8Array): Promise<Buffer>;
+    sendUni(cmd: string, body: Uint8Array, timeout?: number, options?: SsoOptions): Promise<Buffer>;
+    /** 写入一个未加密的uni包 */
+    writeUni(cmd: string, body: Buffer, seq?: number, options?: SsoOptions): Promise<void>;
     /** 发送一个未加密的oidb包 */
     sendOidb(cmd: string, body: Uint8Array): Promise<Buffer>;
     /** 发送一个未加密的OidbSvcTrpcTcp包 */
