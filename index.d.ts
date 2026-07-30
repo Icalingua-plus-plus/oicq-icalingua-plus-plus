@@ -364,6 +364,7 @@ export interface ReplyElem {
     data: {
         id: string, //message_id
         text?: string, //消息文本内容，当获取原消息失败时使用
+        message?: MessageElem[], //原消息链，当获取原消息失败时使用
     }
 }
 
