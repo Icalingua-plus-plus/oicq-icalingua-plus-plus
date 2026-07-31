@@ -210,7 +210,7 @@ export interface MemberInfo extends MemberBaseInfo {
 
 /**
  * 使用cqhttp风格的消息元素类型
- * @see https://github.com/howmanybots/onebot/blob/master/v11/specs/message/segment.md 在此基础上进行了扩展
+ * @see https://github.com/botuniverse/onebot/blob/main/specs/interface/message/segments.md 在此基础上进行了扩展
  */
 export type MessageElem = TextElem | AtElem | FaceElem | BfaceElem | MfaceElem |
     ImgPttElem | LocationElem | MusicElem | ShareElem | JsonElem | XmlElem |
