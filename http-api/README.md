@@ -158,6 +158,7 @@ notice事件有部分格式默认与cqhttp中的格式不同。
 |群组文件|表现为CQ码              |notice.group_upload    |
 |群戳一戳|notice.group.poke      |                       |
 |群设置变|notice.group.setting   |                       |
+|表情回应|notice.group.reaction  |                       |
 |元事件|meta_event.lifecycle.enable|meta_event.lifecycle.enable|
 |元事件|meta_event.lifecycle.disable|meta_event.lifecycle.disable|
 |元事件|meta_event.lifecycle.connect|meta_event.lifecycle.connect|

@@ -623,6 +623,15 @@ export interface GroupEssenceEventData extends CommonGroupNoticeEventData {
     operator_id: number, //操作者
     operator_name: string, //操作者昵称
 }
+/** 群表情回应 */
+export interface GroupReactionEvent extends CommonGroupNoticeEventData {
+    sub_type: "reaction"; //群表情回应
+    user_id: number; //设置回应者
+    id: string; //回应的表情id
+    type: number; //回应的表情类型
+    seq: number; //消息seq
+    set: boolean; //设置/取消回应
+}
 export interface MemberIncreaseEventData extends CommonGroupNoticeEventData {
     sub_type: "increase", //群增加或群员增加
     group_id: number,
@@ -936,6 +945,8 @@ export interface EventMap {
     "notice.group.sign": (this: Client, data: GroupSignEventData) => void;
     /**群精华事件 */
     "notice.group.essence": (this: Client, data: GroupEssenceEventData) => void;
+    /**群表情回应事件 */
+    "notice.group.reaction": (this: Client, data: GroupReactionEventData) => void;
     /**群设置变更事件 */
     "notice.group.setting": (this: Client, data: GroupSettingEventData) => void;
     /**监听以上所有好友notice事件 */
