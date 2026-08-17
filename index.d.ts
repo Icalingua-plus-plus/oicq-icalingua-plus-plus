@@ -1194,6 +1194,8 @@ export class Client extends EventEmitter {
     setGroupRemark(group_id: number, remark: string): Promise<Ret>;
     /** 设置群消息表情回应 */
     setEmojiReaction(group_id: number, msg_seq: number, id: string, type?: number, set?: boolean): Promise<Ret>;
+    /** 群机器人按钮回调 */
+    sendButtonCallback(group_id: number, msg_seq: number, appid: number, id: string, data: string): Promise<Ret>
 
     /** 处理好友请求 */
     setFriendAddRequest(flag: string, approve?: boolean, remark?: string, block?: boolean): Promise<Ret>;
