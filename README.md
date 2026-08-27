@@ -7,7 +7,7 @@
 
 * 本库为 [oicq](https://github.com/takayama-lily/oicq)  v1 的第三方维护版，目的是为了使 Icalingua++ 能正常工作。
 * oicq-icalingua-plus-plus 的诞生离不开  OICQ 原作者 [takayama-lily](https://github.com/takayama-lily) 与其他贡献者的贡献！
-* QQ(安卓)协议基于Node.js的实现，支持最低node版本为 v12.16
+* QQ(安卓)协议基于Node.js的实现，支持最低node版本为 v14
 * 若你不熟悉Node.js或不会组织代码，可通过 [template](https://github.com/takayama-lily/oicq-template) 创建一个简单的应用程序
 * [API参考文档](https://github.com/takayama-lily/oicq/wiki/91.API%E6%96%87%E6%A1%A3) / [事件参考文档](https://github.com/takayama-lily/oicq/wiki/92.%E4%BA%8B%E4%BB%B6%E6%96%87%E6%A1%A3) / [wiki列表](https://github.com/takayama-lily/oicq/wiki)
 

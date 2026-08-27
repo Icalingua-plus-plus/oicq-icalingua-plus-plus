@@ -1,9 +1,9 @@
 {
   "name": "oicq-icalingua-plus-plus",
   "app_name": "oicq-icalingua-plus-plus",
-  "version": "1.26.21",
-  "app_version": "1.26.21",
-  "upday": "2026/08/17",
+  "version": "1.26.22",
+  "app_version": "1.26.22",
+  "upday": "2026/08/27",
   "protocol_version": "v11",
   "description": "oicq(https://github.com/takayama-lily/oicq) v1 for Icalingua++",
   "main": "index.js",
@@ -15,7 +15,7 @@
     "mocha": "./node_modules/.bin/_mocha"
   },
   "engines": {
-    "node": ">= v12.16"
+    "node": ">= v14"
   },
   "repository": "https://github.com/Icalingua-plus-plus/oicq-icalingua-plus-plus.git",
   "author": "The Icalingua++ Authors",
