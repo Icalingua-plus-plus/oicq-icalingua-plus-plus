@@ -57,9 +57,14 @@ export interface ConfBot {
     /** 使用NT上线包，部分消息暂未支持 */
     useNT?: boolean,
 
+    /** 强制使用旧版WT登录，即使当前APK支持NT登录 */
+    forceWt?: boolean,
+
     /** 指定APK信息，覆盖默认的协议参数 */
     apk_info?: {
         id?: string,
+        nt?: boolean,
+        platform?: string,
         name?: string,
         version?: string,
         ver?: string,
@@ -517,6 +522,24 @@ export interface DeviceEventData extends CommonSystemEventData {
     url: string, //验证地址
     phone: string, //密保手机
 }
+export interface LoginAuthDevice {
+    guid: string,
+    qimei: string,
+    qimei36: string,
+    subappid: string,
+    platform: string,
+    brand: string,
+    model: string,
+    bssid: string,
+    devInfo: string,
+    sysVersion: string,
+}
+export interface LoginAuthEventData extends CommonSystemEventData {
+    system_type: "login",
+    sub_type: "auth", //登录频繁时的身份验证
+    url: string, //验证地址
+    device: LoginAuthDevice,
+}
 export interface LoginErrorEventData extends CommonSystemEventData {
     system_type: "login",
     sub_type: "error", //登录遇到错误
@@ -805,8 +828,8 @@ export type GroupNoticeEventData = GroupRecallEventData | GroupSettingEventData 
     MemberIncreaseEventData | MemberDecreaseEventData | GroupPokeEventData | GroupSignEventData |
     GroupEssenceEventData; //11
 
-export type SystemEventData = DeviceEventData | SliderEventData | LoginErrorEventData | QrcodeEventData |
-    OfflineEventData | OnlineEventData; //6(4+2)
+export type SystemEventData = DeviceEventData | LoginAuthEventData | SliderEventData | LoginErrorEventData | QrcodeEventData |
+    OfflineEventData | OnlineEventData; //7(5+2)
 export type RequestEventData = FriendAddEventData | GroupAddEventData | GroupInviteEventData; //3
 export type MessageEventData = PrivateMessageEventData | GroupMessageEventData | DiscussMessageEventData; //3
 export type NoticeEventData = FriendNoticeEventData | GroupNoticeEventData; //2
@@ -921,9 +944,11 @@ export interface EventMap {
     "system.login.slider": (this: Client, data: SliderEventData) => void;
     /**设备锁验证事件 */
     "system.login.device": (this: Client, data: DeviceEventData) => void;
+    /**登录频繁时的身份验证事件 */
+    "system.login.auth": (this: Client, data: LoginAuthEventData) => void;
     /**登录遇到错误事件 */
     "system.login.error": (this: Client, data: LoginErrorEventData) => void;
-    "system.login": (this: Client, data: DeviceEventData | LoginErrorEventData | SliderEventData | QrcodeEventData) => void;
+    "system.login": (this: Client, data: DeviceEventData | LoginAuthEventData | LoginErrorEventData | SliderEventData | QrcodeEventData) => void;
     /**上线事件 */
     "system.online": (this: Client, data: OnlineEventData) => void;
 

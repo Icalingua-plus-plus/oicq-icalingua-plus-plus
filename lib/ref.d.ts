@@ -44,6 +44,8 @@ export interface Device {
 
 export interface ApkInfo {
     id: string,
+    nt: boolean,
+    platform: string,
     name: string,
     version: string,
     ver: string,
