@@ -54,8 +54,11 @@ export interface ConfBot {
     /** 强制使用算法计算T544，而不使用qsign(算法为8.9.50的0C05，混用版本可能导致风控) */
     force_algo_T544?: boolean,
 
-    /** 使用NT上线包，部分消息暂未支持 */
+    /** 使用 NT 上线包，部分消息暂未支持 */
     useNT?: boolean,
+
+    /** 使用 NT 协议上传图片和语音，默认 false，运行时修改从下一次上传生效 */
+    useNTMedia?: boolean,
 
     /** 强制使用旧版WT登录，即使当前APK支持NT登录 */
     forceWt?: boolean,
@@ -293,6 +296,7 @@ export interface ImgPttElem {
         headers?: OutgoingHttpHeaders, //file为网络资源时请求头
         url?: string, //仅接收
         type?: "image" | "flash" | "face",
+        brief?: string, //传统语音预览文案
     }
 }
 

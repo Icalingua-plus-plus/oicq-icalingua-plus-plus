@@ -78,6 +78,7 @@ export interface HighwayUploadStreamObject {
     ticket?: Buffer,
     ext?: Buffer,
     encrypt?: boolean,
+    requireAck?: boolean,
     callback?: (percentage: string) => void,
 }
 
