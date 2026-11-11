@@ -260,9 +260,10 @@ export interface BfaceElem {
     type: "bface",
     data: {
         file: string,
-        text: string
+        text: string,
         width?: number,
         height?: number,
+        type?: "png" | "gif",
     }
 }
 
