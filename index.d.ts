@@ -57,8 +57,8 @@ export interface ConfBot {
     /** 使用 NT 上线包，部分消息暂未支持 */
     useNT?: boolean,
 
-    /** 使用 NT 协议上传图片和语音，默认 false，运行时修改从下一次上传生效 */
-    useNTMedia?: boolean,
+    /** 使用 NT 协议上传图片，默认 false，运行时修改从下一次上传生效 */
+    useNTImage?: boolean,
 
     /** 强制使用旧版WT登录，即使当前APK支持NT登录 */
     forceWt?: boolean,
