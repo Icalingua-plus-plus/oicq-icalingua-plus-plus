@@ -1327,8 +1327,8 @@ export class Client extends EventEmitter {
         fileset_id: string;
         send_status: FlashTransferMessageStatus[];
     }>>;
-    /** 上传单个文件并发送闪传卡片；group=true 为群聊，支持文件名和进度回调，不提供 message_id */
-    sendFlashTransferFile(recv_id: number | string, file: MediaFile, group?: boolean, name?: string, process?: (percentage: string) => void): Promise<Ret<FlashTransferUploadResult & {
+    /** 上传单个文件或数组到同一文件集并发送闪传卡片；name为单文件名或批量文件集名称，group=true为群聊，不提供message_id */
+    sendFlashTransferFile(recv_id: number | string, file: MediaFile | MediaFile[], group?: boolean, name?: string, process?: (percentage: string) => void): Promise<Ret<FlashTransferUploadResult & {
         send_status: FlashTransferMessageStatus[];
     }>>;
     /** 群聊 */
