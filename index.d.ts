@@ -223,7 +223,7 @@ export interface MemberInfo extends MemberBaseInfo {
 export type MessageElem = TextElem | AtElem | FaceElem | BfaceElem | MfaceElem |
     ImgPttElem | LocationElem | MusicElem | ShareElem | JsonElem | XmlElem |
     AnonymousElem | ReplyElem | NodeElem | ShakeElem | PokeElem | FileElem | VideoElem |
-    MiraiElem | RawElem | MarkdownElem | ButtonElem;
+    MiraiElem | RawElem | MarkdownElem | ButtonElem | FlashTransferElem;
 
 export type Sendable = string | MessageElem | Iterable<MessageElem | string>
 
@@ -418,6 +418,23 @@ export interface MarkdownElem {
             token?: string,
         }
     }
+}
+
+/** 收到的 QQ 闪传卡片；发送请使用 sendFlashTransferMsg 或 FlashTransfer.send。 */
+export interface FlashTransferElem {
+    type: "qfile";
+    data: {
+        fileset_id: string;
+        name?: string;
+        file_size?: number | string;
+        expire_time?: number | string;
+        summary?: string;
+        thumbnail?: {
+            fileid: string;
+            url: string;
+            urls: { type: number; url: string }[];
+        };
+    };
 }
 
 /** Markdown按钮消息 */
@@ -900,6 +917,165 @@ export class Gfs {
     download(fid: string): Promise<FileElem["data"]>;
 }
 
+////////// QQ flash transfer
+
+export interface FlashTransferOptions {
+    /** 单次 HTTP 请求超时，单位毫秒，默认 30000 */
+    timeout?: number;
+}
+
+export interface FlashTransferCreateOptions {
+    /** 有效期，单位秒，默认 7 天；服务端仍可能受账号配额限制 */
+    duration?: number;
+    /** 计划上传的普通文件总数，默认 1；upload 会按实际文件自动填写 */
+    total_file_count?: number;
+    /** 计划上传的总字节数，默认 0；upload 会自动填写 */
+    total_file_size?: number;
+    /** 顶层文件及目录的数量，默认与文件总数相同；upload 会自动填写 */
+    first_level_item_count?: number;
+}
+
+export interface FlashTransferTask {
+    fileset_id: string;
+    task_id: string;
+    share_link: string;
+    expire_time: number;
+    expire_left_time: number;
+}
+
+export interface FlashTransferMetadata {
+    cli_fileid: string;
+    name: string;
+    file_size: number | string;
+    parent_id?: string;
+    is_dir?: boolean;
+    cli_file_index?: number;
+    depth?: number;
+    file_type?: number;
+    /** 普通文件必需，十六进制摘要；目录无需填写 */
+    md5?: string;
+    sha1?: string;
+    is_cover?: boolean;
+    /** 目录直属子项数，普通文件为 0 */
+    file_count?: number;
+}
+
+export type FlashTransferUploadInput = MediaFile | { file: MediaFile; name?: string };
+
+export interface FlashTransferUploadSource {
+    name: string;
+    size: number;
+    md5: Buffer | string;
+    sha1: Buffer | string;
+}
+
+/** 由 applyUpload 返回，保留服务端的 IndexNode、存储参数和业务透传信息。 */
+export interface FlashTransferUploadTicket {
+    upload: Record<number, any>;
+    info: Record<number, any>;
+    ukey: string;
+    app_type: number;
+    /** sliceupload 使用的存储 appid */
+    appid: number;
+    biz_trans_info: Buffer;
+    storage_type: number;
+    storage_info: Buffer;
+}
+
+export interface FlashTransferUploadResult extends FlashTransferTask {
+    files: FlashTransferFile[];
+}
+
+export interface FlashTransferMessageTarget {
+    type: "private" | "group";
+    /** 私聊接受 QQ 号（需已有 UID 缓存）或 u_ 开头的 UID；群聊接受群号 */
+    target: number | string;
+}
+
+export interface FlashTransferMessageStatus {
+    /** 服务端返回的目标：私聊为 UID，群号保留十进制字符串 */
+    target: FlashTransferMessageTarget;
+    result: number;
+    message: string;
+}
+
+export interface FlashTransferFile {
+    name: string;
+    file_size: number | string;
+    srv_fileid: string;
+    cli_fileid: string;
+    sha1?: string;
+    physical: {
+        id: string;
+        [key: string]: any;
+    };
+    [key: string]: any;
+}
+
+export interface FlashTransferPage {
+    file_list: FlashTransferFile[];
+    is_end: boolean;
+    pagination_info: string;
+    [key: string]: any;
+}
+
+export interface FlashTransferDownload {
+    url: string;
+    [key: string]: any;
+}
+
+/** 与 Gfs 一样，以下方法会 reject；控制接口保留官网的 snake_case 字段。 */
+export class FlashTransfer {
+    private constructor();
+    /** 分享码或 https://qfile.qq.com/q/... 链接转换为文件集 ID */
+    resolve(code: string): Promise<string>;
+    /** 原生创建文件集，需要在线客户端；保留 task_id 用于完成提交 */
+    create(name: string, options?: FlashTransferCreateOptions): Promise<FlashTransferTask>;
+    /** 完整上传文件、目录或二进制数据，需要在线客户端；进度参数为数据传输百分比 */
+    upload(files: FlashTransferUploadInput | FlashTransferUploadInput[], name?: string, callback?: (percentage: string) => void, options?: FlashTransferCreateOptions): Promise<FlashTransferUploadResult>;
+    /** 分批登记目录及已计算摘要的文件，返回顺序与请求一致 */
+    addFiles(task: Pick<FlashTransferTask, "fileset_id" | "task_id">, files: FlashTransferMetadata[]): Promise<FlashTransferFile[]>;
+    /** 底层上传申请；文件必须是 addFiles 返回的节点，source 提供其名称、大小及摘要 */
+    applyUpload(task: Pick<FlashTransferTask, "fileset_id">, file: FlashTransferFile, source: FlashTransferUploadSource): Promise<FlashTransferUploadTicket>;
+    /** 分片上传或秒传成功后同步单个文件，随后才能提交整个任务 */
+    completeFile(ticket: FlashTransferUploadTicket): Promise<void>;
+    /** 文件级完成同步之后提交整个任务，参数是 task_id */
+    submit(task_id: string): Promise<void>;
+    /** 由服务端生成并发送原生闪传卡片；任一目标失败则 reject，Error.send_status 保留全部结果 */
+    send(fileset_id: string, targets: FlashTransferMessageTarget | FlashTransferMessageTarget[]): Promise<FlashTransferMessageStatus[]>;
+    /** 查询文件集信息 */
+    stat(fileset_id: string): Promise<Record<string, any>>;
+    /** 查询目录的一页文件；pagination_info 使用服务端游标，count 为 1–100 */
+    dir(fileset_id: string, parent_id?: string, pagination_info?: string, count?: number): Promise<FlashTransferPage>;
+    /** 按服务端游标逐页遍历当前目录 */
+    files(fileset_id: string, parent_id?: string): AsyncGenerator<FlashTransferFile>;
+    /** 查询多个文件集的传输进度 */
+    progress(fileset_ids: string[]): Promise<Record<string, any>>;
+    /** 按 srv_fileid 查询文件集内指定文件的传输进度 */
+    fileProgress(fileset_id: string, srv_fileids: string[]): Promise<Record<string, any>>;
+    /** 查询指定目录的文件分类信息 */
+    category(fileset_id: string, parent_id?: string): Promise<Record<string, any>>;
+    /** 设置用户完成官方验证码后取得的 ticket 和 randstr，供下载请求使用 */
+    setCaptcha(ticket: string, randstr: string): void;
+    /** 参数可以是文件元数据，或 physical.id（不是 srv_fileid） */
+    getDownloadUrl(file: FlashTransferFile | string): Promise<FlashTransferDownload>;
+    /** 批量获取下载信息，每批最多 30 个文件，返回顺序与输入一致 */
+    getDownloadUrls(files: (FlashTransferFile | string)[]): Promise<FlashTransferDownload[]>;
+    /** 下载到指定路径，验证大小和可用的 SHA1，不覆盖已有文件 */
+    download(file: FlashTransferFile | string, target: string, callback?: (percentage: string) => void): Promise<{
+        path: string;
+        size: number;
+        sha1: string;
+    }>;
+    /** 底层 sliceupload 数据面；自动申请凭证并提交整个任务请使用 upload */
+    uploadFile(file: MediaFile, ukey: string, appid: number, name?: string, callback?: (percentage: string) => void): Promise<{
+        name: string;
+        size: number;
+        md5: string;
+        sha1: string;
+    }>;
+}
+
 //////////
 
 export type Domain = "tenpay.com"
@@ -1146,6 +1322,15 @@ export class Client extends EventEmitter {
     /** 私聊 */
     sendPrivateMsg(user_id: number, message: Sendable, auto_escape?: boolean): Promise<Ret<{ message_id: string }>>;
     sendFile(user_id: number, file: MediaFile, name?: string, process?: (percentage: string) => void): Promise<Ret<{ message_id: string }>>;
+    /** 发送原生闪传卡片；group=true 为群聊，返回逐目标状态，不提供 message_id */
+    sendFlashTransferMsg(recv_id: number | string, fileset_id: string, group?: boolean): Promise<Ret<{
+        fileset_id: string;
+        send_status: FlashTransferMessageStatus[];
+    }>>;
+    /** 上传单个文件并发送闪传卡片；group=true 为群聊，支持文件名和进度回调，不提供 message_id */
+    sendFlashTransferFile(recv_id: number | string, file: MediaFile, group?: boolean, name?: string, process?: (percentage: string) => void): Promise<Ret<FlashTransferUploadResult & {
+        send_status: FlashTransferMessageStatus[];
+    }>>;
     /** 群聊 */
     sendGroupMsg(group_id: number, message: Sendable, auto_escape?: boolean): Promise<Ret<{ message_id: string }>>;
     /** 群临时会话，大多数时候可以使用私聊达到同样效果 */
@@ -1292,6 +1477,9 @@ export class Client extends EventEmitter {
 
     /** 进入群文件系统 */
     acquireGfs(group_id: number): Gfs;
+
+    /** 进入 QQ 闪传协议接口 */
+    acquireFlashTransfer(options?: FlashTransferOptions): FlashTransfer;
 
     on<T extends keyof EventMap>(event: T, listener: EventMap[T]): this;
     on<S extends string | symbol>(event: S & Exclude<S, keyof EventMap>, listener: (this: Client, ...args: any[]) => void): this;
