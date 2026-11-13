@@ -960,7 +960,13 @@ export interface FlashTransferMetadata {
     file_count?: number;
 }
 
-export type FlashTransferUploadInput = MediaFile | { file: MediaFile; name?: string };
+export interface FlashTransferUploadDirectory {
+    name: string;
+    /** 虚拟目录的子项；文件仍从各自的源路径读取 */
+    children: FlashTransferUploadInput[];
+}
+
+export type FlashTransferUploadInput = MediaFile | { file: MediaFile; name?: string } | FlashTransferUploadDirectory;
 
 export interface FlashTransferUploadSource {
     name: string;
