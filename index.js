@@ -1,5 +1,6 @@
 "use strict";
 const { Client } = require("./lib/oicq");
+const { FlashTransfer } = require("./lib/message/qfile");
 const { segment, cqcode } = require("./util");
 const { checkUin, NOOP } = require("./lib/common");
 const pb = require("./lib/algo/pb");
@@ -20,7 +21,7 @@ const constants = {
 }
 
 module.exports = {
-    Client, createClient,
+    Client, createClient, FlashTransfer,
     segment, cqcode,
     /** @deprecated */
     setGlobalConfig: NOOP,

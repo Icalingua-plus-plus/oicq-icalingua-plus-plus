@@ -975,6 +975,22 @@ export interface FlashTransferUploadSource {
     sha1: Buffer | string;
 }
 
+/** 客户端分片上传所需的凭证。 */
+export interface FlashTransferUploadCredential {
+    ukey: string;
+    appid: number;
+    file_id: string;
+}
+
+/** 由远程 QQ 客户端执行控制操作，文件内容在上传方本地传输。 */
+export interface FlashTransferUploadController<T extends FlashTransferUploadCredential = FlashTransferUploadCredential> {
+    create(name: string, options?: FlashTransferCreateOptions): Promise<FlashTransferTask>;
+    addFiles(task: FlashTransferTask, files: FlashTransferMetadata[]): Promise<FlashTransferFile[]>;
+    applyUpload(task: FlashTransferTask, file: FlashTransferFile, source: FlashTransferUploadSource): Promise<T>;
+    completeFile(ticket: T): Promise<void>;
+    submit(task_id: string): Promise<void>;
+}
+
 /** 由 applyUpload 返回，保留服务端的 IndexNode、存储参数和业务透传信息。 */
 export interface FlashTransferUploadTicket {
     upload: Record<number, any>;
@@ -1033,6 +1049,8 @@ export interface FlashTransferDownload {
 /** 与 Gfs 一样，以下方法会 reject；控制接口保留官网的 snake_case 字段。 */
 export class FlashTransfer {
     private constructor();
+    /** 文件在本机分片上传，创建、登记及完成提交由 control 执行；无需本机登录 QQ */
+    static upload<T extends FlashTransferUploadCredential>(files: FlashTransferUploadInput | FlashTransferUploadInput[], control: FlashTransferUploadController<T>, name?: string, callback?: (percentage: string) => void, options?: FlashTransferCreateOptions & { timeout?: number }): Promise<FlashTransferUploadResult>;
     /** 分享码或 https://qfile.qq.com/q/... 链接转换为文件集 ID */
     resolve(code: string): Promise<string>;
     /** 原生创建文件集，需要在线客户端；保留 task_id 用于完成提交 */
@@ -1042,7 +1060,7 @@ export class FlashTransfer {
     /** 分批登记目录及已计算摘要的文件，返回顺序与请求一致 */
     addFiles(task: Pick<FlashTransferTask, "fileset_id" | "task_id">, files: FlashTransferMetadata[]): Promise<FlashTransferFile[]>;
     /** 底层上传申请；文件必须是 addFiles 返回的节点，source 提供其名称、大小及摘要 */
-    applyUpload(task: Pick<FlashTransferTask, "fileset_id">, file: FlashTransferFile, source: FlashTransferUploadSource): Promise<FlashTransferUploadTicket>;
+    applyUpload(task: Pick<FlashTransferTask, "fileset_id">, file: FlashTransferFile, source: FlashTransferUploadSource): Promise<FlashTransferUploadTicket & FlashTransferUploadCredential>;
     /** 分片上传或秒传成功后同步单个文件，随后才能提交整个任务 */
     completeFile(ticket: FlashTransferUploadTicket): Promise<void>;
     /** 文件级完成同步之后提交整个任务，参数是 task_id */
