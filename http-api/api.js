@@ -6,6 +6,18 @@ let bot;
 class NotFoundError extends Error {}
 
 const available_actions = [
+    "getFavoriteList",
+    "getFavorite",
+    "addFavorite",
+    "editFavorite",
+    "deleteFavorite",
+    "getFavoriteGroups",
+    "addFavoriteGroup",
+    "editFavoriteGroup",
+    "deleteFavoriteGroup",
+    "setFavoriteGroup",
+    "getFavoriteSpace",
+
     "sendPrivateMsg",
     "sendGroupMsg",
     "sendDiscussMsg",

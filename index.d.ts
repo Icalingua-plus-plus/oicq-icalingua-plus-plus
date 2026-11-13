@@ -1092,6 +1092,7 @@ export type Domain = "tenpay.com"
     | "openmobile.qq.com"
     | "qun.qq.com"
     | "ti.qq.com"
+    | "weiyun.com"
     | "";
 
 export interface Sig {
@@ -1239,6 +1240,290 @@ export interface EventMap {
     "internal.sso": (this: Client, data: { cmd: string, seq: number, payload: Buffer }) => void;
     /** 实验性事件: 对方正在输入 */
     "internal.input": (this: Client, data: { user_id: number, end: boolean }) => void;
+}
+
+////////// QQ favorites
+
+/** 收藏中的 uint64：安全整数返回 number，超出安全范围返回十进制字符串。 */
+export type FavoriteInteger = number | string;
+
+export interface FavoriteCollection {
+    cid: string;
+    type?: number;
+    status?: number;
+    author?: FavoriteAuthor;
+    bid?: number;
+    src_app_id?: number;
+    src_app_ver?: string;
+    category?: number;
+    create_time?: FavoriteInteger;
+    collect_time?: FavoriteInteger;
+    modify_time?: FavoriteInteger;
+    sequence?: FavoriteInteger;
+    biz_key?: string;
+    biz_data_list: string[]; /** Base64 编码的原始字节。 */
+    summary?: FavoriteCollectionSummary;
+    star_mark?: boolean;
+    star_time?: FavoriteInteger;
+    share_url?: string;
+    original_app_id?: number;
+    custom_group_id?: number;
+    security_beat?: number;
+    qzone_ugc_key?: string;
+}
+
+export interface FavoriteAuthor {
+    type?: number;
+    num_id?: FavoriteInteger;
+    str_id?: string;
+    group_id?: FavoriteInteger;
+    group_name?: string;
+}
+
+export interface FavoriteCollectionSummary {
+    text_summary?: FavoriteTextSummary;
+    link_summary?: FavoriteLinkSummary;
+    gallery_summary?: FavoriteGallerySummary;
+    audio_summary?: FavoriteAudioSummary;
+    video_summary?: FavoriteVideoSummary;
+    file_summary?: FavoriteFileSummary;
+    location_summary?: FavoriteLocationSummary;
+    rich_media_summary?: FavoriteRichMediaSummary;
+}
+
+export interface FavoriteTextSummary {
+    brief?: string;
+    has_emoji?: boolean;
+}
+
+export interface FavoriteLinkSummary {
+    uri?: string;
+    title?: string;
+    publisher?: string;
+    brief?: string;
+    pic_list: FavoritePicInfo[];
+    type?: number;
+    resource_uri?: string;
+}
+
+export interface FavoritePicInfo {
+    uri?: string;
+    md5?: string; /** Base64 编码的原始字节。 */
+    sha1?: string; /** Base64 编码的原始字节。 */
+    name?: string;
+    note?: string;
+    width?: number;
+    height?: number;
+    size?: number;
+    type?: number;
+    owner?: FavoriteAuthor;
+    pic_id?: string;
+}
+
+export interface FavoriteGallerySummary {
+    pic_list: FavoritePicInfo[];
+    notes?: string;
+}
+
+export interface FavoriteAudioSummary {
+    duration?: number;
+    stt?: string;
+    note?: string;
+}
+
+export interface FavoriteVideoSummary {
+    title?: string;
+    duration?: number;
+    format?: number;
+    category?: number;
+    preview_type?: number;
+    preview_pic_info?: FavoritePicInfo;
+    store_type?: number;
+    store_file_info?: FavoriteFileInfo;
+}
+
+export interface FavoriteFileInfo {
+    src?: number;
+    uid?: FavoriteInteger;
+    bid?: number;
+    fid?: string;
+    name?: string;
+    size?: FavoriteInteger;
+    md5?: string; /** Base64 编码的原始字节。 */
+    sha1?: string; /** Base64 编码的原始字节。 */
+    category?: number;
+}
+
+export interface FavoriteFileSummary {
+    file_info?: FavoriteFileInfo;
+    src_file_info?: FavoriteFileInfo;
+}
+
+export interface FavoriteLocationSummary {
+    name?: string;
+    latitude?: number;
+    longitude?: number;
+    altitude?: number;
+    address?: string;
+    note?: string;
+}
+
+export interface FavoriteRichMediaSummary {
+    title?: string;
+    sub_title?: string;
+    brief?: string;
+    pic_list: FavoritePicInfo[];
+    content_type?: number;
+    original_uri?: string;
+    publisher?: string;
+    rich_media_version?: number;
+}
+
+export interface FavoriteCollectionContent {
+    text_content?: FavoriteTextContent;
+    link_content?: FavoriteLinkContent;
+    gallery_content?: FavoriteGalleryContent;
+    audio_content?: FavoriteAudioContent;
+    video_content?: FavoriteVideoContent;
+    file_content?: FavoriteFileContent;
+    location_content?: FavoriteLocationContent;
+    rich_media_content?: FavoriteRichMediaContent;
+}
+
+export interface FavoriteTextContent {
+    data?: string;
+    has_emoji?: boolean;
+}
+
+export interface FavoriteLinkContent {
+}
+
+export interface FavoriteGalleryContent {
+}
+
+export interface FavoriteAudioContent {
+    data?: string; /** Base64 编码的原始字节。 */
+}
+
+export interface FavoriteVideoContent {
+}
+
+export interface FavoriteFileContent {
+}
+
+export interface FavoriteLocationContent {
+}
+
+export interface FavoriteRichMediaContent {
+    rich_media?: FavoriteRichMedia;
+    raw_data?: string; /** Base64 编码的原始字节。 */
+    biz_data_list: string[]; /** Base64 编码的原始字节。 */
+    pic_list: FavoritePicInfo[];
+    file_list: FavoriteFileInfo[];
+}
+
+export interface FavoriteRichMedia {
+    sections: FavoriteSection[];
+}
+
+export interface FavoriteSection {
+    items: FavoriteItem[];
+}
+
+export interface FavoriteItem {
+    item_type?: number;
+    parag?: FavoriteParagraph;
+    anchor?: FavoriteAnchor;
+    pic_info?: FavoritePicInfo;
+}
+
+export interface FavoriteParagraph {
+    content?: string;
+    style?: FavoriteStyle;
+}
+
+export interface FavoriteStyle {
+    color?: string;
+    font_family?: string;
+    font_weight?: string;
+    font_size?: string;
+}
+
+export interface FavoriteAnchor {
+    url?: string;
+    desc?: string;
+}
+
+export interface FavoriteCollectionFullInfo {
+    collection: FavoriteCollection;
+    content?: FavoriteCollectionContent;
+    /** 富文本 content_type 为 1/2 时，解压后的 HTML。 */
+    html?: string;
+}
+
+export interface FavoriteGetCollectionListMsgRsp {
+    collection_list: FavoriteCollection[];
+    total_count?: number;
+    result?: number;
+}
+
+export interface FavoriteGetCollectionFullInfoMsgRsp {
+    collection_full_info_list: FavoriteCollectionFullInfo[];
+}
+
+export interface FavoriteCustomGroupInfo {
+    custom_group_id?: number;
+    name?: string;
+    create_time?: number;
+    modify_time?: number;
+    total_count?: number;
+}
+
+export interface FavoriteGetCustomGroupMsgRsp {
+    modi_groupid_time?: number;
+    total_count?: number;
+    modi_group_time?: number;
+    customgroupinfo_list: FavoriteCustomGroupInfo[];
+    max_group_count?: number;
+}
+
+export interface FavoriteGetCollectorUserInfoRsp {
+    toatal_space?: FavoriteInteger;
+    used_space?: FavoriteInteger;
+}
+
+export interface FavoriteListOptions {
+    type?: number;
+    bid?: number;
+    category?: number;
+    /** 毫秒时间戳。 */
+    start_time?: number;
+    start_pos?: number;
+    /** 1~100，默认 20。 */
+    page_size?: number;
+    order_type?: 0 | 1;
+    sync_policy?: number;
+}
+export type FavoriteInput = ({ type?: "text"; text: string } |
+    { type: "link"; url: string; title?: string; publisher?: string; brief?: string } |
+    { type: "rich"; html: string; title?: string; brief?: string }) & {
+    bid?: number; category?: number; custom_group_id?: number;
+};
+export interface FavoriteChanges {
+    text?: string;
+    html?: string;
+    url?: string;
+    title?: string;
+    publisher?: string;
+    brief?: string;
+    category?: number;
+    custom_group_id?: number;
+    star_mark?: boolean;
+}
+export interface FavoriteItemResults {
+    /** 批量请求可能部分失败，必须检查 success 和每项 result。 */
+    success: boolean;
+    results: { id: string | number; result: number }[];
 }
 
 /**
@@ -1477,6 +1762,85 @@ export class Client extends EventEmitter {
 
     /** 进入群文件系统 */
     acquireGfs(group_id: number): Gfs;
+
+    //----------QQ 收藏----------
+    /**
+     * 获取一页 QQ 收藏摘要，需要登录票据包含 weiyun.com 的 p_skey。
+     * @param options 筛选条件及分页参数；默认每页 20 条，时间使用毫秒。
+     * @returns 当前页收藏列表、总数及同步状态；result=215000 表示部分同步。
+     */
+    getFavoriteList(options?: FavoriteListOptions): Promise<Ret<FavoriteGetCollectionListMsgRsp>>;
+
+    /**
+     * 获取指定收藏的完整元数据和正文。
+     * @param cid 收藏 ID。
+     * @returns 收藏信息和正文；富文本 content_type 为 1/2 时额外返回解码后的 html。
+     */
+    getFavorite(cid: string): Promise<Ret<FavoriteCollectionFullInfo>>;
+
+    /**
+     * 增加文本、链接或 HTML 收藏。
+     * @param favorite 收藏内容；字符串按纯文本处理，对象可指定类型及所属分组。
+     * @returns 新收藏的 cid 与 collect_time。
+     */
+    addFavorite(favorite: FavoriteInput | string): Promise<Ret<{ cid: string; collect_time: FavoriteInteger }>>;
+
+    /**
+     * 编辑收藏，先读取详情再合并指定字段，保留其余元数据和资源。
+     * @param cid 收藏 ID。
+     * @param changes 需要修改的字段；type=1 支持文本正文，type=6 支持链接字段，type=8 支持 HTML。
+     * @returns 收藏 ID 与修改时间；其他类型支持元数据编辑。
+     */
+    editFavorite(cid: string, changes: FavoriteChanges): Promise<Ret<{ cid: string; modify_time: FavoriteInteger }>>;
+
+    /**
+     * 删除收藏，单次支持 1~10 项。
+     * @param cid 单个收藏 ID 或收藏 ID 列表。
+     * @returns 整体 success 与逐项 result；协议请求成功时仍可能存在部分失败。
+     */
+    deleteFavorite(cid: string | string[]): Promise<Ret<FavoriteItemResults>>;
+
+    /**
+     * 获取收藏分组及分组同步信息。
+     * @returns 分组列表、数量、同步时间及分组数量上限。
+     */
+    getFavoriteGroups(): Promise<Ret<FavoriteGetCustomGroupMsgRsp>>;
+
+    /**
+     * 增加收藏分组。
+     * @param name 非空分组名称。
+     * @returns 新分组 ID 与创建时间。
+     */
+    addFavoriteGroup(name: string): Promise<Ret<{ custom_group_id: number; create_time: number }>>;
+
+    /**
+     * 修改收藏分组名称。
+     * @param custom_group_id 分组 ID。
+     * @param name 新的非空分组名称。
+     * @returns 分组修改时间。
+     */
+    editFavoriteGroup(custom_group_id: number, name: string): Promise<Ret<{ modify_time: number }>>;
+
+    /**
+     * 删除收藏分组，单次支持 1~10 项。
+     * @param custom_group_id 单个分组 ID 或分组 ID 列表。
+     * @returns 删除时间、整体 success 与逐项 result；需检查部分失败。
+     */
+    deleteFavoriteGroup(custom_group_id: number | number[]): Promise<Ret<FavoriteItemResults & { del_time?: number }>>;
+
+    /**
+     * 设置收藏的所属分组，单次支持 1~10 条收藏。
+     * @param cid 单个收藏 ID 或收藏 ID 列表。
+     * @param custom_group_id 目标分组 ID。
+     * @returns 整体 success 与逐项 result；需检查部分失败。
+     */
+    setFavoriteGroup(cid: string | string[], custom_group_id: number): Promise<Ret<FavoriteItemResults>>;
+
+    /**
+     * 获取收藏空间使用情况。
+     * @returns 空间总量 total_space 与已用量 used_space，单位为字节。
+     */
+    getFavoriteSpace(): Promise<Ret<{ total_space: FavoriteInteger; used_space: FavoriteInteger }>>;
 
     /** 进入 QQ 闪传协议接口 */
     acquireFlashTransfer(options?: FlashTransferOptions): FlashTransfer;
