@@ -17,6 +17,7 @@ const available_actions = [
     "deleteFavoriteGroup",
     "setFavoriteGroup",
     "getFavoriteSpace",
+    "getFavoriteFileUrl",
 
     "sendPrivateMsg",
     "sendGroupMsg",

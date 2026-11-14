@@ -1550,6 +1550,28 @@ export interface FavoriteItemResults {
     results: { id: string | number; result: number }[];
 }
 
+/** 收藏文件资源的临时下载凭据；headers 应随资源请求发送。 */
+export interface FavoriteDownload {
+    /** 收藏 ID。 */
+    cid: string;
+    /** 文件 ID。 */
+    fid: string;
+    /** 收藏的原始协议类型，例如 5 视频、6 文件。 */
+    type: number;
+    /** 原始文件名。 */
+    name: string;
+    /** 文件大小，单位为字节；大整数以十进制字符串表示。 */
+    size: FavoriteInteger;
+    /** 临时资源地址，过期后应重新调用 getFavoriteFileUrl。 */
+    url: string;
+    /** 资源专用鉴权头，应与 url 一起使用。 */
+    headers: Record<string, string>;
+    /** 服务端是否要求下载后重命名文件。 */
+    rename_file: boolean;
+    /** 服务端返回的风险提示。 */
+    risk_tips: string;
+}
+
 /**
  * 方法不会reject或抛出异常，使用retcode判断是否成功
  * @see {Ret}
@@ -1859,6 +1881,15 @@ export class Client extends EventEmitter {
      * @returns 整体 success 与逐项 result；需检查部分失败。
      */
     setFavoriteGroup(cid: string | string[], custom_group_id: number): Promise<Ret<FavoriteItemResults>>;
+
+    /**
+     * 获取收藏文件或视频的临时下载地址，需同时使用返回的资源鉴权头。
+     * 语音与高清音频存储为内联音频数据，不适用此接口。
+     * @param cid 收藏 ID。
+     * @param fid 文件 ID；多附件收藏必须指定。
+     * @returns 下载链接、文件信息、资源鉴权头及服务端重命名要求。
+     */
+    getFavoriteFileUrl(cid: string, fid?: string): Promise<Ret<FavoriteDownload>>;
 
     /**
      * 获取收藏空间使用情况。
