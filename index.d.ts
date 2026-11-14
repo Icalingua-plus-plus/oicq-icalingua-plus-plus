@@ -1812,7 +1812,7 @@ export class Client extends EventEmitter {
     /**
      * 编辑收藏，先读取详情再合并指定字段，保留其余元数据和资源。
      * @param cid 收藏 ID。
-     * @param changes 需要修改的字段；type=1 支持文本正文，type=6 支持链接字段，type=8 支持 HTML。
+     * @param changes 需要修改的字段；type=1 支持文本正文，type=2 支持链接字段，type=8 支持 HTML。
      * @returns 收藏 ID 与修改时间；其他类型支持元数据编辑。
      */
     editFavorite(cid: string, changes: FavoriteChanges): Promise<Ret<{ cid: string; modify_time: FavoriteInteger }>>;
