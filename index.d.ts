@@ -648,6 +648,68 @@ export interface GroupMessageReaction {
 export interface GroupMessageReactionDetails {
     users: Array<{ user_id: number; nickname: string; head_url: string }>;
 }
+export interface EmoticonSearchOptions {
+    /** 上一页返回的分页会话。首次搜索时省略。 */
+    session_info?: Uint8Array;
+    /** 每次请求的条数。默认首屏 32 条，后续 24 条。 */
+    page_size?: number;
+    /** 群号。群聊和私聊上下文至多填写一个。 */
+    group_id?: number;
+    /** 私聊对象的 QQNT UID。 */
+    guest_uid?: string;
+    /** 搜索文字合成表情。 */
+    compose_only?: boolean;
+}
+
+export interface EmoticonSearchImage {
+    url: string;
+    md5: string;
+    width: number;
+    height: number;
+    size: number | bigint;
+}
+
+export interface EmoticonSearchPoint {
+    x: number;
+    y: number;
+}
+
+export interface EmoticonSearchColor {
+    red: number;
+    green: number;
+    blue: number;
+    alpha: number;
+}
+
+export interface EmoticonSearchItem {
+    resource_id: string;
+    image: EmoticonSearchImage;
+    thumbnail: EmoticonSearchImage;
+    image_other: string;
+    package_id: string;
+    package_type: string;
+    source_url: string;
+    source_icon_url: string;
+    source_name: string;
+    emoji_type: number;
+    text_compose?: {
+        bounding_box?: { top_left: EmoticonSearchPoint; bottom_right: EmoticonSearchPoint };
+        text_color?: EmoticonSearchColor;
+        shadow_color?: EmoticonSearchColor;
+    };
+    mall?: { pack_id: number; pic_id: string; jump_url: string; name: string };
+    channel?: { feed_id: string; pic_id: string; jump_url: string };
+}
+
+export interface EmoticonSearchPage {
+    items: EmoticonSearchItem[];
+    /** 继续搜索同一个关键词时原样传回。 */
+    session_info: Buffer;
+    has_more: boolean;
+    compose_items: EmoticonSearchItem[];
+    allow_compose: boolean;
+    other: string;
+}
 export interface Anonymous {
     id: number,
     name: string,
@@ -1750,6 +1812,8 @@ export class Client extends EventEmitter {
     sendGroupSign(group_id: number): Promise<Ret>;
     /** 设置群备注名 */
     setGroupRemark(group_id: number, remark: string): Promise<Ret>;
+    /** 按关键词搜索 QQ 表情 */
+    searchEmoticons(keyword: string, options?: EmoticonSearchOptions): Promise<Ret<EmoticonSearchPage>>;
     /** 设置群消息表情回应 */
     setEmojiReaction(group_id: number, msg_seq: number, id: string, type?: number, set?: boolean): Promise<Ret>;
     /** 获取群消息指定表情的所有回应人员 */
