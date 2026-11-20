@@ -637,6 +637,16 @@ export interface GroupMessageEventData extends CommonMessageEventData {
     atme: boolean,
     seqid: number,
     block: boolean, //是否已屏蔽
+    emoji_reactions?: GroupMessageReaction[], //有表情回应汇总时才提供
+}
+export interface GroupMessageReaction {
+    id: string;
+    type: number;
+    count: number;
+    is_clicked: boolean;
+}
+export interface GroupMessageReactionDetails {
+    users: Array<{ user_id: number; nickname: string; head_url: string }>;
 }
 export interface Anonymous {
     id: number,
@@ -729,6 +739,8 @@ export interface GroupReactionEvent extends CommonGroupNoticeEventData {
     id: string; //回应的表情id
     type: number; //回应的表情类型
     seq: number; //消息seq
+    message_id?: string; //目标消息ID
+    count?: number; //该表情当前的回应人数
     set: boolean; //设置/取消回应
 }
 export interface MemberIncreaseEventData extends CommonGroupNoticeEventData {
@@ -848,7 +860,7 @@ export type FriendNoticeEventData = FriendIncreaseEventData | FriendDecreaseEven
 export type GroupNoticeEventData = GroupRecallEventData | GroupSettingEventData | GroupTitleEventData |
     GroupTransferEventData | GroupMuteEventData | GroupAdminEventData |
     MemberIncreaseEventData | MemberDecreaseEventData | GroupPokeEventData | GroupSignEventData |
-    GroupEssenceEventData; //11
+    GroupEssenceEventData | GroupReactionEvent; //12
 
 export type SystemEventData = DeviceEventData | LoginAuthEventData | SliderEventData | LoginErrorEventData | QrcodeEventData |
     OfflineEventData | OnlineEventData; //7(5+2)
@@ -1740,6 +1752,8 @@ export class Client extends EventEmitter {
     setGroupRemark(group_id: number, remark: string): Promise<Ret>;
     /** 设置群消息表情回应 */
     setEmojiReaction(group_id: number, msg_seq: number, id: string, type?: number, set?: boolean): Promise<Ret>;
+    /** 获取群消息指定表情的所有回应人员 */
+    getEmojiReaction(group_id: number, msg_seq: number, id: string, type?: number): Promise<Ret<GroupMessageReactionDetails>>;
     /** 群机器人按钮回调 */
     sendButtonCallback(group_id: number, msg_seq: number, appid: number, id: string, data: string): Promise<Ret>
 
