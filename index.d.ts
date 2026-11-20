@@ -800,8 +800,9 @@ export interface GroupEssenceEventData extends CommonGroupNoticeEventData {
     operator_name: string, //操作者昵称
 }
 /** 群表情回应 */
-export interface GroupReactionEvent extends CommonGroupNoticeEventData {
+export interface GroupReactionEventData extends CommonGroupNoticeEventData {
     sub_type: "reaction"; //群表情回应
+    group_id: number;
     user_id: number; //设置回应者
     id: string; //回应的表情id
     type: number; //回应的表情类型
@@ -927,7 +928,7 @@ export type FriendNoticeEventData = FriendIncreaseEventData | FriendDecreaseEven
 export type GroupNoticeEventData = GroupRecallEventData | GroupSettingEventData | GroupTitleEventData |
     GroupTransferEventData | GroupMuteEventData | GroupAdminEventData |
     MemberIncreaseEventData | MemberDecreaseEventData | GroupPokeEventData | GroupSignEventData |
-    GroupEssenceEventData | GroupReactionEvent; //12
+    GroupEssenceEventData | GroupReactionEventData; //12
 
 export type SystemEventData = DeviceEventData | LoginAuthEventData | SliderEventData | LoginErrorEventData | QrcodeEventData |
     OfflineEventData | OnlineEventData; //7(5+2)
