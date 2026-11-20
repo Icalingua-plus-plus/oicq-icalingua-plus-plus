@@ -738,6 +738,11 @@ export interface FriendRecallEventData extends CommonFriendNoticeEventData {
     operator_id: number, //撤回者(好友或自己)
     message_id: string,
 }
+export interface FriendMessageRefreshEventData extends CommonFriendNoticeEventData {
+    sub_type: "message_refresh",
+    user_id: number,
+    message: Omit<PrivateMessageEventData, "reply">,
+}
 export interface FriendProfileEventData extends CommonFriendNoticeEventData {
     sub_type: "profile", //好友资料变更
     user_id: number,
@@ -918,7 +923,7 @@ export interface SyncRemarkEventData extends CommonEventData {
 }
 
 export type FriendNoticeEventData = FriendIncreaseEventData | FriendDecreaseEventData | FriendRecallEventData |
-    FriendProfileEventData | FriendPokeEventData; //5
+    FriendProfileEventData | FriendPokeEventData | FriendMessageRefreshEventData; //6
 export type GroupNoticeEventData = GroupRecallEventData | GroupSettingEventData | GroupTitleEventData |
     GroupTransferEventData | GroupMuteEventData | GroupAdminEventData |
     MemberIncreaseEventData | MemberDecreaseEventData | GroupPokeEventData | GroupSignEventData |
@@ -1280,6 +1285,8 @@ export interface EventMap {
     "notice.friend.decrease": (this: Client, data: FriendDecreaseEventData) => void;
     /**好友消息撤回事件 */
     "notice.friend.recall": (this: Client, data: FriendRecallEventData) => void;
+    /**私聊消息刷新通知 */
+    "notice.friend.message_refresh": (this: Client, data: FriendMessageRefreshEventData) => void;
     /**好友资料变更事件 */
     "notice.friend.profile": (this: Client, data: FriendProfileEventData) => void;
     /**好友戳一戳事件 */
